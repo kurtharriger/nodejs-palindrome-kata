@@ -11,7 +11,7 @@ var isAlpha = function(c) {
 }
 
 // returns true if palindrome false otherwise
-var isPalindrome = function(str) {
+var isPalindromeRecursive = function(str) {
   if(str.length <= 1) return true;
 
   var first = str[0];
@@ -25,9 +25,28 @@ var isPalindrome = function(str) {
   }
   else {
     return false;    
-  }
-    
+  }    
 }
+// transform to non-recursive function
+var isPalindrome = function(str) {
+  var startIndex = 0;
+  var lastIndex = str.length - 1;
+      
+  while(lastIndex-startIndex > 0) {
+    var first = str[startIndex];
+    var last = str[lastIndex];
+
+    if(!isAlpha(first))     startIndex += 1;
+    else if(!isAlpha(last)) lastIndex -= 1;
+    else if(!compare(first, last)) return false;
+    else {
+      startIndex += 1;
+      lastIndex -= 1;
+    }     
+  }
+  return true;
+}
+
 
 
 // is empty string considered palendrome? 
