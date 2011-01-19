@@ -14,13 +14,19 @@ var isAlpha = function(c) {
 var isPalindrome = function(str) {
   if(str.length <= 1) return true;
 
+  var first = str[0];
+  var last = str.slice(-1);
 
-  if(compare(str[0],str[str.length -1])) {
-    return isPalindrome(str.slice(1,-1));  
+  if(!isAlpha(first)) return isPalindrome(str.slice(1));
+  if (!isAlpha(last)) return isPalindrome(str.slice(-1));
+
+  if(compare(first, last)) {
+    return isPalindrome(str.slice(1,-1));
   }
   else {
-    return false;
+    return false;    
   }
+    
 }
 
 
@@ -46,12 +52,13 @@ assert.ok(!isPalindrome("abc"), "'abc' is not a palindrome");
 assert.ok(isPalindrome("aA"), "'aA' case should be ignored");
 
 // non-alpha characters are ignored
-//assert.ok(isPalindrome("a,a", "'a,a' punctuation is ignored"));
+assert.ok(isPalindrome("a,a", "'a,a' punctuation is ignored"));
 assert.ok(!isAlpha(","), "', is not an alpha character");
 assert.ok(isAlpha("A"), "A is alpha");
 assert.ok(isAlpha("Z"), "Z is alpha");
 assert.ok(isAlpha("a"), "a is alpha");
 assert.ok(isAlpha("z"), "z is alpha");
 
+// many characters
+assert.ok(isPalindrome("Ah, Satan sees Natasha"), "'Ah, Satan sees Natasha' is a palindrome");
 
-//assert.ok(isPalindrome("Ah, Satan sees Natasha"), "'Ah, Satan sees Natasha' is a palindrome");
